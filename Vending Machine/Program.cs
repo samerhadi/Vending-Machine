@@ -11,51 +11,43 @@ namespace Vending_Machine
         static void Main(string[] args)
         {
             
+
             bool running = false;
 
           while(!running)
             {
 
-
-                Console.WriteLine("(1) Display vending machine items");
-                Console.WriteLine("(2) Purchse");
-                Console.WriteLine("(3) Insert money");
-                Console.WriteLine("(4) Exit");
+                Console.WriteLine("(1) Purchse");
+                Console.WriteLine("(2) Exit");
                 int mainMenuChoise = int.Parse(Console.ReadLine());
 
 
                 if (mainMenuChoise.Equals(1))
                 {
                     VendingMachine machine = new VendingMachine();
-                    machine.ShowAll();
-                }
-
-
-                if (mainMenuChoise.Equals(2))
-                {
-                    VendingMachine machine = new VendingMachine();
                     machine.Purchase();
+
                 }
 
-                if (mainMenuChoise.Equals(3))
+                else if (mainMenuChoise.Equals(2))
                 {
-                    VendingMachine machine = new VendingMachine();
-                    machine.InsertMoney();
+                    Environment.Exit(0);   
                 }
 
-                if (mainMenuChoise.Equals(4))
+                else
                 {
-                    VendingMachine machine = new VendingMachine();
-                    machine.EndTransaction();
+                    Console.WriteLine("du måste välja en av dessa två val");
                 }
-
 
             }
-
+           
 
             Console.ReadKey();
 
 
+
+
+         
 
         }
     }
