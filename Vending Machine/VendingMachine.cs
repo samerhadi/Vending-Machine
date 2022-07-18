@@ -52,35 +52,60 @@ namespace Vending_Machine
             ShowAll();
 
             
-            Console.Write("Välj en product Nummer! ");
+            Console.Write("Välj en product nummer som du vill köpa! ");
             int productId = int.Parse(Console.ReadLine());
 
 
 
-            foreach(var product in products)    
+            foreach (var product in products)
 
-           if(productId == product.Id &&  moneyPool > product.Price)
-            {
-              UserProducts.Add(product.Name);
-              int newPrice = moneyPool - product.Price;
+                if (productId == product.Id && moneyPool > product.Price)
+                {
+                    UserProducts.Add(product.Name);
+                    int newPrice = moneyPool - product.Price;
 
                     foreach (var item in UserProducts)
                     {
-                        Console.WriteLine("Du har köpt " + item + " Du har kvar "  + newPrice + " kr på ditt konto");
-                       
+                        Console.WriteLine("Du har köpt " + item + " Du har kvar " + newPrice + " kr på ditt konto, Vill du försätta handla? y/n");
+
+                        string continue_string1 = Console.ReadLine();
+                        if (continue_string1 == "y")
+                        {
+                            moneyPool = newPrice;
+                            Console.Write("Välj en product nummer som du vill köpa! ");
+                             int newproductId = int.Parse(Console.ReadLine());
+
+                            if (newproductId == product.Id && moneyPool > product.Price)
+                            {
+                                UserProducts.Add(product.Name);
+                            }
+
+                        }
+
+                        else if (continue_string1 == "n")
+                        {
+                            Console.WriteLine("******************************");
+                            Console.WriteLine("Du får tillbaks din växel " + newPrice + " kr ");
+                            Console.WriteLine("Tack för din köp");
+                        }
+
                         return;
-                        
+
+
+
                     }
-                 
 
-                  
-                   
-                   
-             }
 
-        
-            else if (moneyPool < product.Price)
+
+
+
+                }
+
+
+                else if (moneyPool < product.Price)
+                    continue;
                 Console.WriteLine("Du har inte tillräckligt med pengar på ditt konto, Vill du lägga till pengar? y/n");
+ 
                 string continue_string = Console.ReadLine();
                 if (continue_string == "y")
                 {
@@ -93,7 +118,7 @@ namespace Vending_Machine
                 EndTransaction(); 
                 
                 }
-
+          
             }
 
         public void ShowAll()
